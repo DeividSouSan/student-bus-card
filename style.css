@@ -1,0 +1,144 @@
+:root {
+    --theme-color: #02C745;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+hr {
+    height: 1px;
+    border: none;
+
+    width: 50%;
+    margin: 1rem;
+
+    background-image: linear-gradient(to right, white, black, white);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+    >h1 {
+        font-size: 3rem;
+        font-weight: 400;
+
+        text-align: center;
+    }
+
+}
+
+.config-bx {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    ;
+
+    >button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 42px;
+        height: 42px;
+
+        border-radius: 100%;
+        border: none;
+
+        background-color: var(--theme-color);
+        cursor: pointer;
+    }
+}
+
+.current-cash {
+    text-align: center;
+
+    >h1 {
+        font-size: 2rem;
+        font-weight: 200;
+    }
+
+    .cash {
+        font-size: 3rem;
+    }
+
+    .cash::after {
+        font-size: 1rem;
+        color: #474343;
+        content: 'créditos';
+    }
+}
+
+.more-info {
+    text-align: left;
+}
+
+
+.card {
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    user-select: none;
+
+    margin: 10px;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+
+    width: 480px;
+    height: 300px;
+
+    background-color: #ccc;
+
+    transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    >.name {
+        position: absolute;
+        bottom: 3rem;
+
+        padding-left: 1rem;
+
+        font-size: 1.5rem;
+        font-weight: 400;
+    }
+
+    .id {
+        position: absolute;
+        right: 1rem;
+
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .type {
+        position: absolute;
+        bottom: 0;
+
+        color: white;
+        background-color: var(--theme-color);
+
+        border-radius: 0 0 1rem 1rem;
+
+        padding: 0.5rem 1rem;
+        width: 100%;
+
+        font-size: 1.25rem;
+        font-weight: bold;
+    }
+
+}
+
+.card:hover {
+    transform: scale(1.1);
+}
