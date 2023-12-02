@@ -20,6 +20,7 @@ export default function colorPickerModal() {
 
     const colorPickerInput = document.createElement('input');
     colorPickerInput.type = 'color';
+    colorPickerInput.value = document.documentElement.style.getPropertyValue('--theme-color');
 
     const submitButton = document.createElement('button');
     submitButton.innerText = 'Selecionar';
