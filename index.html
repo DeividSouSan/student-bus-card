@@ -17,7 +17,6 @@
 <body>
   <main>
     <h1>CARTÃO DE ESTUDANTE</h1>
-
     <div class="config-bx">
       <button class="color-picker-button">
         <img src="images/color-fill.svg" alt="" srcset="">
@@ -36,13 +35,42 @@
       <p>PRÓXIMA RECARGA: 12/01/2024</p>
       <p>DIAS TOTAIS: 24</p>
     </div>
+
     <hr>
+
     <div class="card">
       <h1 class="name">????</h1>
       <h2 class="id">????</h2>
       <p class="type">????</p>
     </div>
   </main>
+
+  <template class="color-picker-template">
+    <div class="modal-container">
+      <section class="modal">
+        <h1>PERSONALIZE SEU CARTÃO</h1>
+
+        <div class="details">
+          <label for="">Detalhes: </label>
+          <input class='color-picker-input' type="color">
+        </div>
+
+        <div class="text">
+          <label for="">Texto: </label>
+          <input class='font-color-input' type="color">
+        </div>
+
+        <div class="image-preview-container">
+          <img class='image-preview' src="" alt="">
+          <button class="refresh-image-button" >
+            <img src="images/rotate.svg" alt="">
+          </button>
+        </div>
+
+        <button class="select-button">SELECIONAR</button>
+      </section>
+    </div>
+  </template>
   <script src="index.js" type="module"></script>
 </body>
 
