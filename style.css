@@ -1,5 +1,7 @@
 :root {
     --theme-color: #02C745;
+    --font-color: #fff8f8;
+    --card-image: url('https://source.unsplash.com/random/480x300');
 }
 
 * {
@@ -104,7 +106,8 @@ main {
     width: 480px;
     height: 300px;
 
-    background-color: #ccc;
+    background-image: var(--card-image);
+    background-size: cover;
 
     transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
 
@@ -124,6 +127,10 @@ main {
 
         font-size: 1rem;
         font-weight: 500;
+    }
+
+    .id, .name {
+        color: var(--font-color);
     }
 
     .type {
@@ -168,21 +175,31 @@ main {
         flex-direction: column;
         align-items: center;
 
-        width: 300px;
-        height: 200px;
+        width: 400px;
+        height: fit-content;
 
         background-color: white;
         border-radius: 0.25rem;
-
+        padding: 1rem;
         gap: 0.5rem;
 
         box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.5);
+
         >h1 {
             font-size: 1.5rem;
             font-weight: 400;
         }
 
         >input {
+            width: 200px;
+            height: 40px;
+
+            border: none;
+
+            cursor: pointer;
+        }
+
+        > img {
             width: 200px;
             height: 100px;
 
