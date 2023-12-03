@@ -1,68 +1,55 @@
-import LocalStorageController from "../controller/LocalStorageController.js";
+import LocalStorageController from '../controller/LocalStorageController.js';
 
 export default function colorPickerModal() {
-    // Modal Container
-    const modalContainer = document.createElement('div');
-    modalContainer.classList.add('colorPickerContainer');
+    const template = document.querySelector('.color-picker-template');
+    const modal = template.content.cloneNode(true);
+    const modalContainer = modal.querySelector('.modal-container');
 
-    modalContainer.onclick = (event) => {
-        if (event.target.classList.contains('colorPickerContainer')) {
+    modalContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('modal-container')) {
             modalContainer.remove();
         }
-    }
+    });
 
-    // Modal 
-    const modal = document.createElement('div');
-    modal.classList.add('colorPickerModal');
+    const localStorage = new LocalStorageController();
 
-    const modalHeader = document.createElement('h1');
-    modalHeader.innerText = 'Selecione uma cor';
-
-    const themeColorPicker = document.createElement('input');
-    themeColorPicker.type = 'color';
-    themeColorPicker.value = document.documentElement.style.getPropertyValue('--theme-color');
-
-    const fontThemePicker = document.createElement('input');
-    fontThemePicker.type = 'color';
-    fontThemePicker.value = document.documentElement.style.getPropertyValue('--font-color');
-
+    const imagePreview = modal.querySelector('img');
+    imagePreview.src = localStorage.getValues('imageURL').url;
+    const refreshImageButton = modal.querySelector('.refresh-image-button');
 
     let fetchedURL;
-    const imgPreview = document.createElement('img');
 
-    fetch('https://source.unsplash.com/random/480x300')
-        .then(response => {
-            fetchedURL = response.url;
-            imgPreview.src = fetchedURL;
-        })
+    const changeImage = async () => {
+        refreshImageButton.disabled = true;
+        await fetch('https://source.unsplash.com/random/480x300')
+            .then(response => {
+                fetchedURL = response.url;
+                imagePreview.src = fetchedURL;
+            })
+            .finally(() => {
+                refreshImageButton.disabled = false;
+            })
+    }
 
+    refreshImageButton.addEventListener('click', () => {
+        changeImage();
+    });
 
-    const selectButton = document.createElement('button');
-    selectButton.innerText = 'Selecionar';
-    selectButton.type = 'button';
+    const detailsColor = modal.querySelector('.color-picker-input');
+    detailsColor.value = document.documentElement.style.getPropertyValue('--details-color');
 
+    const fontColor = modal.querySelector('.font-color-input');
+    fontColor.value = document.documentElement.style.getPropertyValue('--font-color');
 
+    const selectButton = modal.querySelector('.select-button');
     selectButton.onclick = async () => {
-
-        const localStorage = new LocalStorageController();
-        localStorage.setValues('themeColor', { "color": themeColorPicker.value });
-        localStorage.setValues('fontColor', { "color": fontThemePicker.value });
+        localStorage.setValues('detailsColor', { "color": detailsColor.value });
+        localStorage.setValues('fontColor', { "color": fontColor.value });
         localStorage.setValues('imageURL', { "url": fetchedURL });
 
         modalContainer.remove();
         window.location.reload();
     }
 
-    const appends = (element, ...appends) => {
-        appends.forEach(append => {
-            element.appendChild(append);
-        });
-    }
-    // Modal Appends
-    appends(modal, modalHeader, themeColorPicker, fontThemePicker, imgPreview, selectButton);
-
-    // Appends
-    modalContainer.appendChild(modal);
-
-    return modalContainer;
+    return modal;
 }
