@@ -1,5 +1,5 @@
 :root {
-    --theme-color: #02C745;
+    --details-color: #02C745;
     --font-color: #fff8f8;
     --card-image: url('https://source.unsplash.com/random/480x300');
 }
@@ -45,10 +45,8 @@ main {
     align-items: center;
     gap: 1rem;
     margin: 1rem 0;
-    ;
 
     >button {
-
         display: flex;
         justify-content: center;
         align-items: center;
@@ -59,7 +57,7 @@ main {
         border-radius: 100%;
         border: none;
 
-        background-color: var(--theme-color);
+        background-color: var(--details-color);
         cursor: pointer;
     }
 
@@ -129,7 +127,8 @@ main {
         font-weight: 500;
     }
 
-    .id, .name {
+    .id,
+    .name {
         color: var(--font-color);
     }
 
@@ -138,7 +137,7 @@ main {
         bottom: 0;
 
         color: white;
-        background-color: var(--theme-color);
+        background-color: var(--details-color);
 
         border-radius: 0 0 1rem 1rem;
 
@@ -155,7 +154,7 @@ main {
     transform: scale(1.1);
 }
 
-.colorPickerContainer {
+.modal-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -170,7 +169,8 @@ main {
 
     background-color: rgba(0, 0, 0, 0.5);
 
-    .colorPickerModal {
+    .modal {
+        animation: grow 0.5s ease-in-out;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -190,25 +190,71 @@ main {
             font-weight: 400;
         }
 
-        >input {
-            width: 200px;
-            height: 40px;
+        .details,
+        .text {
+            display: flex;
+            align-items: center;
+            >input {
+
+                width: 200px;
+                height: 40px;
+
+                border: none;
+
+                cursor: pointer;
+            }
+
+            >label {
+                font-size: 1.1rem;
+                font-weight: 400;
+            }
+        }
+
+        .image-preview-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1rem;
 
             border: none;
 
             cursor: pointer;
+
+            .image-preview {
+                width: 200px;
+                height: 100px;
+            }
+
+            >.refresh-image-button {
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+        
+                width: 42px;
+                height: 42px;
+        
+                border-radius: 100%;
+                border: none;
+        
+                background-color: var(--details-color);
+                cursor: pointer;
+            }
+
+            .refresh-image-button:disabled {
+                animation: rotate 1s ease-in-out infinite;
+
+                background-color: #474343;
+                color: #252525;
+                
+                cursor: not-allowed;
+                
+            }
+
+            
         }
 
-        > img {
-            width: 200px;
-            height: 100px;
-
-            border: none;
-
-            cursor: pointer;
-        }
-
-        >button {
+        >.select-button {
             width: 100px;
             height: 40px;
 
@@ -238,4 +284,25 @@ main {
     100% {
         translate: 0 0;
     }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes grow {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+    
 }
