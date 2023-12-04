@@ -12,9 +12,10 @@ export default function colorPickerModal() {
 	});
 
 	const localStorage = new LocalStorageController();
+	const appearence = localStorage.getValues('appearence');
 
 	const imagePreview = modal.querySelector('img');
-	imagePreview.src = localStorage.getValues('imageURL').url;
+	imagePreview.src = appearence.imageURL;
 	const refreshImageButton = modal.querySelector('.refresh-image-button');
 
 	let fetchedURL;
@@ -38,9 +39,11 @@ export default function colorPickerModal() {
 
 	const selectButton = modal.querySelector('.select-button');
 	selectButton.onclick = async () => {
-		localStorage.setValues('detailsColor', { "color": detailsColor.value });
-		localStorage.setValues('fontColor', { "color": fontColor.value });
-		localStorage.setValues('imageURL', { "url": fetchedURL });
+		localStorage.setValues("appearence", {
+			'detailsColor': detailsColor.value,
+			'fontColor': fontColor.value,
+			'imageURL': fetchedURL
+		});
 
 		modalContainer.remove();
 		window.location.reload();
