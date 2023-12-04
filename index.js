@@ -1,28 +1,32 @@
 import colorPickerModal from "./components/colorPickerModal.js";
-
 import LocalStorage from "./controller/LocalStorageController.js";
 
 const colorPickerButton = document.querySelector('.color-picker-button');
 
 const localStorage = new LocalStorage();
-const newUser = localStorage.getValues('newUser') ? false : true
+const appearence = localStorage.getValues('appearence');
 
-if (newUser) {
-    localStorage.setValues('newUser', { "value": false });
-    localStorage.setValues('detailsColor', { "color": "#02C745" });
-    localStorage.setValues('fontColor', { "color": "#000000" });
-    localStorage.setValues('imageURL', { "url": "https://fakeimg.pl/480x300?text=card+img" });
+const setProperty = (property, value) => {
+    document.documentElement.style.setProperty(property, value);
 }
 
-const detailsColor = localStorage.getValues('detailsColor');
-const fontColor = localStorage.getValues('fontColor');
-const imageURL = localStorage.getValues('imageURL');
+const userExist = localStorage.getValues('newUser');
+const newUser = userExist ? false : true
 
-document.documentElement.style.setProperty('--details-color', detailsColor.color);
-document.documentElement.style.setProperty('--font-color', fontColor.color);
-document.documentElement.style.setProperty('--card-image', `url(${imageURL.url})`);
+if (newUser) {
+    localStorage.setValues(
+        "appearence", {
+        'detailsColor': "#02C745",
+        'fontColor': "#000000",
+        'imageURL': "https://fakeimg.pl/480x300?text=card+img"
+    });
 
-colorPickerButton.addEventListener('click', () => {
-    console.log(colorPickerModal())
-    document.body.appendChild(colorPickerModal());
-});
+    localStorage.setValues('newUser', { "value": false });
+}
+
+setProperty('--details-color', appearence.detailsColor);
+setProperty('--font-color', appearence.fontColor);
+setProperty('--card-image', `url(${appearence.imageURL})`);
+
+colorPickerButton.onclick = () => document.body.appendChild(colorPickerModal());
+
