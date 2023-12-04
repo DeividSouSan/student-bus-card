@@ -1,7 +1,8 @@
+/* Empty variables to better user experience */
 :root {
-    --details-color: #02C745;
-    --font-color: #fff8f8;
-    --card-image: url('https://source.unsplash.com/random/480x300');
+    --details-color: null;
+    --font-color: null;
+    --card-image: null;
 }
 
 * {
@@ -194,6 +195,8 @@ main {
         .text {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            width: 90%;
             >input {
 
                 width: 200px;
